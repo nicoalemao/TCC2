@@ -33,3 +33,30 @@ app.post('/upload', upload.single('file'), (req, res) => {
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
+
+// this example uses axios and form-data
+const axios = require('axios');
+const FormData = require('form-data');
+const fs = require('fs');
+
+data = new FormData();
+data.append('media', fs.createReadStream('uploads/img.jpg'));
+data.append('models', 'deepfake');
+data.append('api_user', '933992579');
+data.append('api_secret', '88rdvzLDAKPhjqxaQjcGwY5uDiS4djpf');
+
+axios({
+  method: 'post',
+  url:'https://api.sightengine.com/1.0/check.json',
+  data: data,
+  headers: data.getHeaders()
+})
+.then(function (response) {
+  // on success: handle response
+  console.log(response.data);
+})
+.catch(function (error) {
+  // handle error
+  if (error.response) console.log(error.response.data);
+  else console.log(error.message);
+});

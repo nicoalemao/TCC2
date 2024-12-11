@@ -60,7 +60,7 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
     const file = fileInput.files[0];
     
     if (!file) {
-      alert('Por favor, selecione um arquivo.');
+      alert('Por favor, selecione um arquivo válido.');
       return;
     }
     
